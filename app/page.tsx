@@ -1,38 +1,36 @@
-<<<<<<< HEAD
-'use client'
-import { useEffect } from 'react'
-import { useSession } from '../../hooks/useSession'
-import { useRouter } from 'next/navigation'
+import React from 'react'; // Add React import for JSX
+import { redirect } from 'next/navigation';
+import { createServerClient } from '@/lib/supabase';
+import ErrorMessage from '@/components/ErrorMessage';
 
-export default function HomePage() {
-  const session = useSession()
-=======
+export default async function Page() {
+  const supabase = createServerClient();
+  const {
+    data: { session },
+    error,
+  } = await supabase.auth.getSession();
 
-'use client'
+  if (error) {
+    return <ErrorMessage message="Failed to fetch session." />;
+  }
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { useSession } from '../hooks/useSession'
+  if (!session) {
+    return (
+      <div className="p-4">
+        <a href="/login" className="text-blue-500 underline">
+          Login
+        </a>
+      </div>
+    );
+  }
 
-export default function Home() {
-  const { session } = useSession()
->>>>>>> 5971a59ad466a9dd1814ff4f28ab772ce6c15400
-  const router = useRouter()
+  const userRole = session.user?.user_metadata?.role;
 
-  useEffect(() => {
-    if (session) {
-      router.push('/operator/dashboard')
-    } else {
-      router.push('/login')
-    }
-<<<<<<< HEAD
-  }, [session])
-
-  return null
+  if (userRole === 'client') {
+    return redirect('/portal/dashboard');
+  } else if (userRole === 'operator') {
+    return redirect('/operator');
+  } else {
+    return <ErrorMessage message="Unauthorized access." />;
+  }
 }
-=======
-  }, [session, router])
-
-  return <p>Redirecting...</p>
-}
->>>>>>> 5971a59ad466a9dd1814ff4f28ab772ce6c15400
