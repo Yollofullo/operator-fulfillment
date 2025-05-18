@@ -1,6 +1,7 @@
-'use client'
-import { useEffect } from 'react'
-import maplibregl from 'maplibre-gl'
+'use client';
+import React from 'react';
+import { useEffect } from 'react';
+import maplibregl from 'maplibre-gl';
 
 export default function MapView() {
   useEffect(() => {
@@ -9,9 +10,9 @@ export default function MapView() {
       style: 'https://demotiles.maplibre.org/style.json',
       center: [0, 0],
       zoom: 2,
-    })
-    return () => map.remove()
-  }, [])
+    });
+    return () => map.remove();
+  }, []);
 
-  return <div id="map" className="w-full h-96 border" />
+  return <div id="map" className="w-full h-96 border" />;
 }

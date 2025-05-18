@@ -1,5 +1,5 @@
-
-'use client'
+'use client';
+import React from 'react';
 
 export default function DashboardPage() {
   return (
@@ -7,5 +7,5 @@ export default function DashboardPage() {
       <h1 className="text-2xl font-bold">Operator Dashboard</h1>
       <p className="text-gray-700">View and manage assigned orders.</p>
     </div>
-  )
+  );
 }

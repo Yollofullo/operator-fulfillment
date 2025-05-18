@@ -1,6 +1,7 @@
-'use client'
-import OrderCreator from '../../components/OrderCreator'
-import OrderList from '../../components/OrderList'
+'use client';
+import React from 'react';
+import OrderCreator from '../../components/OrderCreator';
+import OrderList from '../../components/OrderList';
 
 export default function AdminPage() {
   return (
@@ -9,5 +10,5 @@ export default function AdminPage() {
       <OrderCreator />
       <OrderList />
     </div>
-  )
+  );
 }
